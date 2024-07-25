@@ -66,6 +66,8 @@ class Person {
 }
 
 void main() {
+    print("Vroom Companion: Car Buying & Selling Platform");
+
     // creating some cars
     Car tesla = Car("Tesla", 35000);
     Car ford = Car("Ford", 28000);

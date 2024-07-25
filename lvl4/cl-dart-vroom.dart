@@ -35,7 +35,8 @@ class Person {
     void buyCar(Car car) {
         if (moneyLeft >= car.price) {
             ownedCars.add(car);
-            print("\n${car.name} was added to your collection. Your collection of cars is $ownedCars");
+            print("\n${car.name} was added to your collection.");
+            viewOwnedCars(this);
             moneyLeft -= car.price;
             print("\$${car.price} was deducted from your account. Money left in bank is \$$moneyLeft");
         } else {
@@ -46,7 +47,8 @@ class Person {
     // method 2
     void sellCar(Car car) {
         if (ownedCars.remove(car)) {
-            print("\n${car.name} was removed from your collection! Your new collection is $ownedCars");
+            print("\n${car.name} was removed from your collection!");
+            viewOwnedCars(this);
             moneyLeft += car.price;
             print("${car.price} was added to your account");
         } else {

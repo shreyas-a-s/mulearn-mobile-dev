@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class Car {
     String name;
     double price;
@@ -8,7 +10,7 @@ class Car {
     // method
     void changePrice(double newPrice) {
         if (newPrice <= 0) {
-            print("Price cannot be zero or negative!");
+            print("\nPrice cannot be zero or negative!");
         } else {
             this.price = newPrice;
         }
@@ -23,7 +25,7 @@ class Car {
 
 class Person {
     String name;
-    List<String> ownedCars;
+    List<Car> ownedCars;
     double moneyLeft;
 
     // constructor
@@ -32,19 +34,23 @@ class Person {
     // method 1
     void buyCar(Car car) {
         if (moneyLeft >= car.price) {
-            ownedCars.add(car.name);
+            ownedCars.add(car);
+            print("\n${car.name} was added to your collection. Your collection of cars is $ownedCars");
             moneyLeft -= car.price;
+            print("\$${car.price} was deducted from your account. Money left in bank is \$$moneyLeft");
         } else {
-            print("Your bank balance ($moneyLeft) is not enough!");
+            print("\nYour bank balance ($moneyLeft) is not enough!");
         }
     }
 
     // method 2
     void sellCar(Car car) {
-        if (ownedCars.remove(car.name)) {
-            print("${car.name} was removed from your collection!");
+        if (ownedCars.remove(car)) {
+            print("\n${car.name} was removed from your collection! Your new collection is $ownedCars");
             moneyLeft += car.price;
             print("${car.price} was added to your account");
+        } else {
+            print("\n${car.name} is not present in you collection!");
         }
     }
 
@@ -66,25 +72,75 @@ void main() {
     Car lexus = Car("Lexus", 40000);
     Car audi = Car("Audi", 39000);
 
-    // creating some persons
-    Person leno = Person("Jay Leno", ["Tesla", "Honda", "Chevrolet"], 100000);
+    // create an array of cars
+    List<Car> cars = [tesla, ford, honda, chevrolet, toyota, bmw, lexus, audi];
 
-    // person before changes
-    print(leno);
+    stdout.write("Enter your name: ");
+    String name = stdin.readLineSync() ?? "PersonOne";
 
-    // invoking some changes in person
-    leno.buyCar(ford);
-    leno.sellCar(tesla);
+    stdout.write("Enter your bank balance (in dollars): ");
+    double bankBalance = getValidDouble();
 
-    // person after changes
-    print(leno);
+    // creating a person with provided name and bank balance
+    Person person1 = Person(name, [], bankBalance);
 
-    // car before price change
-    print(toyota);
+    while(true) {
+        print('''\n1) Buy Car
+2) Sell Car''');
+        stdout.write("Enter the choice (1-2): ");
+        int choice = int.parse(stdin.readLineSync()!);
 
-    // invoking some changes in car
-    toyota.changePrice(21000);
+        switch(choice) {
+            case 1:
+                buyCar(person1, cars);
+                break;
 
-    // car after price change
-    print(toyota);
+                case 2:
+                    sellCar(person1);
+                    break;
+        }
+    }
+}
+
+void buyCar(Person person, List<Car> cars) {
+    int index = 1;
+    print("\n");
+    for (Car car in cars) {
+        print("$index) ${car.name} - \$${car.price}");
+        index++;
+    }
+    stdout.write("Choose which car to buy: ");
+    int choice = int.parse(stdin.readLineSync()!);
+
+    person.buyCar(cars[choice-1]);
+}
+
+void sellCar(Person person) {
+    int index = 1;
+    print("\n");
+    for (Car car in person.ownedCars) {
+        print("$index) ${car.name} - \$${car.price}");
+        index++;
+    }
+    stdout.write("Choose which car to sell: ");
+    int choice = int.parse(stdin.readLineSync()!);
+
+    person.sellCar(person.ownedCars[choice-1]);
+}
+
+/// Function to get a validated number from user input.
+double getValidDouble() {
+  while (true) {
+    String? input = stdin.readLineSync();
+
+    if (input != null && input.isNotEmpty) {
+      try {
+        return double.parse(input);
+      } catch (e) {
+        stdout.write("Invalid input. Please enter a valid number: ");
+      }
+    } else {
+      stdout.write("Input cannot be empty. Please enter a valid number: ");
+    }
+  }
 }

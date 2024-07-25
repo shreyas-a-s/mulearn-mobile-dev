@@ -87,8 +87,9 @@ void main() {
     while(true) {
         print('''\n1) Buy Car
 2) Sell Car
-3) Exit''');
-        stdout.write("Enter the choice (1-3): ");
+3) View Your Owned Cars
+4) Exit''');
+        stdout.write("Enter the choice (1-4): ");
         int choice = int.parse(stdin.readLineSync()!);
 
         switch(choice) {
@@ -101,6 +102,10 @@ void main() {
                     break;
 
                 case 3:
+                    viewOwnedCars(person1);
+                    break;
+
+                case 4:
                     print("Exiting from the platform...");
                     return;
                     break;
@@ -135,6 +140,15 @@ void sellCar(Person person) {
     int choice = int.parse(stdin.readLineSync()!);
 
     person.sellCar(person.ownedCars[choice-1]);
+}
+
+void viewOwnedCars(Person person) {
+    int index = 1;
+    print("\nYour owned cars are:");
+    for (Car car in person.ownedCars) {
+        print("$index) ${car.name} - \$${car.price}");
+        index++;
+    }
 }
 
 /// Function to get a validated number from user input.

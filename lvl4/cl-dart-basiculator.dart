@@ -15,10 +15,10 @@ void main() {
     int choice = int.parse(stdin.readLineSync() ?? '');
 
     stdout.write("Enter the first number: ");
-    double number1 = double.parse(stdin.readLineSync() ?? '');
+    double number1 = getValidDouble();
 
     stdout.write("Enter the second number: ");
-    double number2 = double.parse(stdin.readLineSync() ?? '');
+    double number2 = getValidDouble();
 
     switch(choice) {
       case 1:
@@ -86,5 +86,22 @@ void performComparison(double a, double b) {
     print("$a is equal to $b");
   } else {
       print("$a is less than $b");
+  }
+}
+
+/// Function to get a validated number from user input.
+double getValidDouble() {
+  while (true) {
+    String? input = stdin.readLineSync();
+
+    if (input != null && input.isNotEmpty) {
+      try {
+        return double.parse(input);
+      } catch (e) {
+        stdout.write("Invalid input. Please enter a valid number: ");
+      }
+    } else {
+      stdout.write("Input cannot be empty. Please enter a valid number: ");
+    }
   }
 }

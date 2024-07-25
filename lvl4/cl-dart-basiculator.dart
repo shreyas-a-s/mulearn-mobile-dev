@@ -9,7 +9,8 @@ void main() {
 3) Multiplication
 4) Division
 5) Modulus
-6) Comparison''');
+6) Comparison
+7) Exit''');
     stdout.write("Enter the operation to perform (1-6): ");
     int choice = int.parse(stdin.readLineSync() ?? '');
 
@@ -43,6 +44,10 @@ void main() {
       case 6:
         performComparison(number1, number2);
         break;
+
+      case 7:
+        print("Exiting the program...");
+        return;
 
       default:
         print("Invalid choice. Enter a number between 1 and 6");

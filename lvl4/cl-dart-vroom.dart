@@ -7,7 +7,11 @@ class Car {
 
     // method
     void changePrice(double newPrice) {
-        this.price = newPrice;
+        if (newPrice <= 0) {
+            print("Price cannot be zero or negative!");
+        } else {
+            this.price = newPrice;
+        }
     }
 
     // method that helps in printing object info
@@ -27,14 +31,21 @@ class Person {
 
     // method 1
     void buyCar(Car car) {
-        ownedCars.add(car.name);
-        moneyLeft -= car.price;
+        if (moneyLeft >= car.price) {
+            ownedCars.add(car.name);
+            moneyLeft -= car.price;
+        } else {
+            print("Your bank balance ($moneyLeft) is not enough!");
+        }
     }
 
     // method 2
     void sellCar(Car car) {
-        ownedCars.remove(car.name);
-        moneyLeft += car.price;
+        if (ownedCars.remove(car.name)) {
+            print("${car.name} was removed from your collection!");
+            moneyLeft += car.price;
+            print("${car.price} was added to your account");
+        }
     }
 
     // method that helps in printing object info

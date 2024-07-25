@@ -43,6 +43,9 @@ void main() {
       case 6:
         performComparison(number1, number2);
         break;
+
+      default:
+        print("Invalid choice. Enter a number between 1 and 6");
     }
   }
 }

@@ -86,8 +86,9 @@ void main() {
 
     while(true) {
         print('''\n1) Buy Car
-2) Sell Car''');
-        stdout.write("Enter the choice (1-2): ");
+2) Sell Car
+3) Exit''');
+        stdout.write("Enter the choice (1-3): ");
         int choice = int.parse(stdin.readLineSync()!);
 
         switch(choice) {
@@ -98,6 +99,14 @@ void main() {
                 case 2:
                     sellCar(person1);
                     break;
+
+                case 3:
+                    print("Exiting from the platform...");
+                    return;
+                    break;
+
+                default:
+                    print("Invalid option. Select a number from 1-3");
         }
     }
 }

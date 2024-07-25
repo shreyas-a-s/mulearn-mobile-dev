@@ -13,6 +13,7 @@ class Car {
             print("\nPrice cannot be zero or negative!");
         } else {
             this.price = newPrice;
+            print("Price of $name was changed to \$$price");
         }
     }
 
@@ -91,7 +92,8 @@ void main() {
         print('''\n1) Buy Car
 2) Sell Car
 3) View Your Owned Cars
-4) Exit''');
+4) Change Price of Car
+5) Exit''');
         stdout.write("Enter the choice (1-4): ");
         int choice = int.parse(stdin.readLineSync()!);
 
@@ -109,6 +111,10 @@ void main() {
                     break;
 
                 case 4:
+                    changeCarPrice(person1);
+                    break;
+
+                case 5:
                     print("Exiting from the platform...");
                     return;
                     break;
@@ -151,6 +157,19 @@ void viewOwnedCars(Person person) {
     for (Car car in person.ownedCars) {
         print("$index) ${car.name} - \$${car.price}");
         index++;
+    }
+}
+
+void changeCarPrice(Person person) {
+    if (person.ownedCars.length == 0) {
+        print("Sadly you don't own any cars!");
+    } else {
+        viewOwnedCars(person);
+        stdout.write("Choose the car to change price: ");
+        int choice = int.parse(stdin.readLineSync()!);
+        stdout.write("Enter the new price: ");
+        double newPrice = getValidDouble();
+        person.ownedCars[choice-1].changePrice(newPrice);
     }
 }
 

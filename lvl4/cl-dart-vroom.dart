@@ -38,7 +38,8 @@ class Person {
             print("\n${car.name} was added to your collection.");
             viewOwnedCars(this);
             moneyLeft -= car.price;
-            print("\$${car.price} was deducted from your account. Money left in bank is \$$moneyLeft");
+            print("\$${car.price} was deducted from your account.");
+            print("Money left in bank is \$$moneyLeft");
         } else {
             print("\nYour bank balance ($moneyLeft) is not enough!");
         }

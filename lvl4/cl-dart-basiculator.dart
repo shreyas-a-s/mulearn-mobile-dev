@@ -8,8 +8,9 @@ void main() {
 2) Subtraction
 3) Multiplication
 4) Division
-5) Modulus''');
-    stdout.write("Enter the operation to perform (1-5): ");
+5) Modulus
+6) Comparison''');
+    stdout.write("Enter the operation to perform (1-6): ");
     int choice = int.parse(stdin.readLineSync() ?? '');
 
     stdout.write("Enter the first number: ");
@@ -38,6 +39,10 @@ void main() {
       case 5:
         performModulus(number1, number2);
         break;
+
+      case 6:
+        performComparison(number1, number2);
+        break;
     }
   }
 }
@@ -64,4 +69,14 @@ void performDivision(double a, double b) {
 
 void performModulus(double a, double b) {
   print("The remainder of division between $a and $b is ${a%b}");
+}
+
+void performComparison(double a, double b) {
+  if (a>b) {
+    print("$a is greater than $b");
+  } else if (a==b) {
+    print("$a is equal to $b");
+  } else {
+      print("$a is less than $b");
+  }
 }

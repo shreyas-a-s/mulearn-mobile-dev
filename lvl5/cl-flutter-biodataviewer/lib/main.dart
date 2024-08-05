@@ -9,6 +9,7 @@ void main() {
         primarySwatch: Colors.blue,
       ),
       home: BioDataPage(), // Set the home property to BioDataPage
+      debugShowCheckedModeBanner: false, // Remove debug banner in final app
     ),
   );
 }

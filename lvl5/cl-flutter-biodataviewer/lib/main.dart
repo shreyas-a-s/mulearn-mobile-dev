@@ -7,7 +7,13 @@ void main() {
       title: 'BioData App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.light,
       ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeMode.system, // Switch based on system theme
       home: BioDataPage(), // Set the home property to BioDataPage
       debugShowCheckedModeBanner: false, // Remove debug banner in final app
     ),
